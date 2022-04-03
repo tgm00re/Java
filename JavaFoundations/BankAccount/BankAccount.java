@@ -28,9 +28,9 @@ public class BankAccount {
     }
 
     private void addMoney(String accountType, double amount){
-        if(accountType == "checking"){
+        if(accountType.equals("checking")){
             this.checkingBalance += amount;
-        } else if(accountType == "savings"){
+        } else if(accountType.equals("savings")){
             this.savingsBalance += amount;
         } else {
             throw new IllegalArgumentException();
