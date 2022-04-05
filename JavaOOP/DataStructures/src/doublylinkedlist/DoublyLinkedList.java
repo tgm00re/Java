@@ -61,7 +61,7 @@ public class DoublyLinkedList {
 		runner.next = this.head;
 		this.head.prev = runner;
 	}
-	
+		
 	
 	public void printValues() {
 		if(this.head == null) {
