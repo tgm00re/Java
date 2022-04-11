@@ -20,7 +20,7 @@ public class ExpenseApi {
 	}
 	
 	@RequestMapping(value="/api/expenses/create", method=RequestMethod.POST)
-	protected Expense createBook(
+	protected Expense createExpense(
 			@RequestParam(value="name") String name,
 			@RequestParam(value="vendor") String vendor,
 			@RequestParam(value="price") double price,
@@ -43,6 +43,17 @@ public class ExpenseApi {
 	@RequestMapping(value="/api/expenses/delete/{id}")
 	protected void destroy(@PathVariable("id") long id) {
 		expenseService.delete(id);
+	}
+	
+	@RequestMapping(value="/api/expenses/edit/{id}", method=RequestMethod.PUT)
+	protected Expense updateExpense(
+			@PathVariable("id") long id,
+			@RequestParam(value="name") String name,
+			@RequestParam(value="vendor") String vendor,
+			@RequestParam(value="price") double price,
+			@RequestParam(value="description") String description
+			) {
+		return expenseService.update(id, name, vendor, price, description);
 	}
 	
 	

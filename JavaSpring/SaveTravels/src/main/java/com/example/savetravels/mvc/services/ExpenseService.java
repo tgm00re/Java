@@ -32,7 +32,7 @@ public class ExpenseService {
 		return null;
 	}
 	
-	public Expense update(long id, String name, String vendor, double price) {
+	public Expense update(long id, String name, String vendor, double price, String description) {
 		Expense expenseToUpdate = this.findOneById(id);
 		if(expenseToUpdate == null) {
 			return null;
