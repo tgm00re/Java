@@ -10,5 +10,6 @@ import com.example.savetravels.mvc.models.Expense;
 
 @Repository
 public interface ExpenseRepo extends CrudRepository<Expense, Long>{
+	@Override
 	List<Expense> findAll();
 }

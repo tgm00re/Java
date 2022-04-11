@@ -24,10 +24,10 @@
             <tbody>
             <c:forEach items="${expenseList}" var="expense">
               <tr>
-                <td><c:out value="${expense.name}"/></td>
+                <td><a href="/expense/view/${expense.id}"><c:out value="${expense.name}"/></a></td>
                 <td><c:out value="${expense.vendor}"/></td>
                 <td><c:out value="${expense.price}"/></td>
-                <td><a href="/expense/edit/${expense.id}">Edit</a></td>
+                <td><a href="/expense/edit/${expense.id}">Edit</a> | <a class="text-danger" href="/expense/delete/${expense.id}">Delete</a></td>
               </tr>
               </c:forEach>
             </tbody>

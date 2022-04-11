@@ -21,25 +21,25 @@ public class Expense {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank(message="Cannot be null.")
 	@Size(min = 2, max = 20)
 	private String name;
-	
+
 	@NotBlank(message="Cannot be null.")
 	@Size(min= 2, max=20)
 	private String vendor;
-	
+
 	@NotNull(message="Cannot be null.")
 	@Min(value = 1, message="Price must be greater than $1.")
 	private double price;
-	
+
 	@NotNull(message="Cannot be null.")
 	@Size(min= 2, max=300, message="Description must be 2 or more characters.")
 	private String description;
-	
-	
-	
+
+
+
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date createdAt;
@@ -47,7 +47,7 @@ public class Expense {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date updatedAt;
 
-	
+
 
 	public Expense() {}
 
@@ -85,25 +85,25 @@ public class Expense {
 	public double getPrice() {
 		return price;
 	}
-	
+
 	public Date getCreatedAt() {
 		return createdAt;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 
 	public void setPrice(double price) {
 		this.price = price;
 	}
 
-	
+
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
@@ -116,8 +116,8 @@ public class Expense {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
-	
-	
-	
+
+
+
+
 }
