@@ -62,4 +62,11 @@ public class DormitoryController {
 		studentServ.addStudentToDormitory(studentId, dormId);
 		return "redirect:/dorm/view/" + dormId;
 	}
+	
+	@RequestMapping("/removefromdorm/{dormId}/{studentId}")
+	public String removeFromDorm(@PathVariable("dormId") Long dormId, @PathVariable("studentId") Long studentId) {
+		studentServ.removeStudentFromDormitory(studentId);
+		return "redirect:/dorm/view/" + dormId;
+		
+	}
 }

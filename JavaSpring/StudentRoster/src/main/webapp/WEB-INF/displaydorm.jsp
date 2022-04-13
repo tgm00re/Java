@@ -26,7 +26,10 @@
         <h2>Students at <c:out value="${dorm.name}"/>:</h2>
         <ul>
             <c:forEach items="${dorm.students}" var="student">
-                <li><c:out value="${student.name}"/></li>
+                <li>
+                    <c:out value="${student.name}"/>
+                    <a class="text-danger" href="/removefromdorm/${dorm.id}/${student.id}">Remove From Dorm</a>
+                </li>
             </c:forEach>
         </ul>
     </div>

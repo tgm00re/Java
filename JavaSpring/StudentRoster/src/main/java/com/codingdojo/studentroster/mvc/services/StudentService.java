@@ -43,7 +43,15 @@ public class StudentService {
 		}
 		student.get().setDormitory(dormitory);
 		return studentRepository.save(student.get());
-		
+	}
+	
+	public Student removeStudentFromDormitory(Long studentId) {
+		Optional<Student> student = studentRepository.findById(studentId);
+		if(student.isPresent()) {
+			student.get().setDormitory(null);
+			studentRepository.save(student.get());
+		}
+		return null;
 	}
 	
 	public List<Student> findStudentsWithoutDormitory() {
