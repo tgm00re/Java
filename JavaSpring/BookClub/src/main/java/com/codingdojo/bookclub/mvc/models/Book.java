@@ -35,6 +35,10 @@ public class Book {
 	@Size(min=2, max=50, message="Author Name must be between 2 and 50 characters")
 	private String authorName;
 	
+	@NotBlank(message="Description cannot be blank!")
+	@Size(max=2000, message="Description cannot be more than 2000 characters!")
+	private String description;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	private User user;
@@ -60,10 +64,11 @@ public class Book {
 	
 	public Book() {}
 	
-	public Book(Long id, String title, String authorName, User user) {
+	public Book(Long id, String title, String authorName, String description, User user) {
 		this.id = id;
 		this.title = title;
 		this.authorName = authorName;
+		this.description = description;
 		this.user = user;
 	}
 
@@ -89,6 +94,14 @@ public class Book {
 
 	public void setAuthorName(String authorName) {
 		this.authorName = authorName;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public User getUser() {
