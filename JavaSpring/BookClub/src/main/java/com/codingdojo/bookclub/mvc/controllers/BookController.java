@@ -32,6 +32,7 @@ public class BookController {
 			return "redirect:/";
 		}
 		List<Book> bookList = bookService.findAll();
+		model.addAttribute("user_id", session.getAttribute("user_id"));
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("user_name",session.getAttribute("user_name"));
 		return "books.jsp";
@@ -52,6 +53,7 @@ public class BookController {
 		}
 		User currentUser = userService.findOneById((Long)session.getAttribute("user_id"));
 		book.setUser(currentUser);
+		book.setBorrower(currentUser);
 		bookService.create(book);
 		return "redirect:/books";
 	}
@@ -101,6 +103,57 @@ public class BookController {
 		bookService.update(bookToUpdate);
 		return "redirect:/books";
 		
+	}
+	
+	
+	@RequestMapping("/books/{id}/borrow/{userId}")
+	public String borrowBook(@PathVariable("id") Long id, @PathVariable("userId") Long userId) {
+		Book bookToBorrow = bookService.findOneById(id);
+		User user = userService.findOneById(userId);
+		if(bookToBorrow == null || user == null) {
+			return "redirect:/books";
+		}
+		if(bookToBorrow.getBorrower().getId() != bookToBorrow.getUser().getId()) {
+			return "redirect:/books";
+		}
+		
+		bookToBorrow.setBorrower(user);
+		bookService.update(bookToBorrow);
+		System.out.println(bookToBorrow.getId() + " ---> " + bookToBorrow.getBorrower().getId());
+		return "redirect:/books";
+	}
+	
+	@RequestMapping("/books/{id}/return")
+	public String updateBook(@PathVariable("id") Long id, HttpSession session) {
+		Book bookToReturn = bookService.findOneById(id);
+		if(bookToReturn == null) {
+			System.out.println("Book is null");
+			return "redirect:/books";
+		}
+		System.out.println("Session ID: " + (Long) session.getAttribute("user_id") + " , borrower ID: " + bookToReturn.getBorrower().getId() );
+		if(!bookToReturn.getBorrower().getId().equals((Long) session.getAttribute("user_id")) ){
+			System.out.println("Borrower is NOT equal to session ID");
+			return "redirect:/books";
+		}
+		bookToReturn.setBorrower(bookToReturn.getUser());
+		bookService.update(bookToReturn);
+		return "redirect:/books";
+		
+	}
+	
+	@RequestMapping("/books/{id}/delete")
+	public String deleteBook(@PathVariable("id") Long id, HttpSession session) {
+		Long sessionId = (Long) session.getAttribute("user_id");
+		Book book = bookService.findOneById(id);
+		if(book == null || sessionId == null) {
+			return "redirect:/books";
+		}
+		if(!book.getUser().getId().equals(sessionId)) {
+			return "redirect:/books";
+		}
+		//book deletion is valid
+		bookService.delete(id);
+		return "redirect:/books";
 	}
 	
 	

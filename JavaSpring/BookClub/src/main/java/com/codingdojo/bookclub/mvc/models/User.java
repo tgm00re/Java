@@ -48,6 +48,9 @@ public class User {
 	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
 	private List<Book> books;
 	
+	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+	private List<Book> borrowedBooks;
+	
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date created_at;
@@ -69,12 +72,13 @@ public class User {
 	
 	public User() {}
 	
-	public User(Long id, String name, String email, String password, String confirmPassword, List<Book> books) {
+	public User(Long id, String name, String email, String password, String confirmPassword, List<Book> books, List<Book> borrowedBooks) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.books = books;
+		this.borrowedBooks = borrowedBooks;
 	}
 
 	public Long getId() {
@@ -115,6 +119,24 @@ public class User {
 
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+	
+	
+
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+
+	public List<Book> getBorrowedBooks() {
+		return borrowedBooks;
+	}
+
+	public void setBorrowedBooks(List<Book> borrowedBooks) {
+		this.borrowedBooks = borrowedBooks;
 	}
 
 	public Date getCreated_at() {

@@ -43,6 +43,10 @@ public class Book {
 	@JoinColumn(name="user_id")
 	private User user;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="borrower_id")
+	private User borrower;
+	
 	
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -64,12 +68,13 @@ public class Book {
 	
 	public Book() {}
 	
-	public Book(Long id, String title, String authorName, String description, User user) {
+	public Book(Long id, String title, String authorName, String description, User user, User borrower) {
 		this.id = id;
 		this.title = title;
 		this.authorName = authorName;
 		this.description = description;
 		this.user = user;
+		this.borrower = borrower;
 	}
 
 	public Long getId() {
@@ -110,6 +115,14 @@ public class Book {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public User getBorrower() {
+		return borrower;
+	}
+
+	public void setBorrower(User borrower) {
+		this.borrower = borrower;
 	}
 
 	public Date getCreated_at() {
