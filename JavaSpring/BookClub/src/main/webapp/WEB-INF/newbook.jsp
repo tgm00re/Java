@@ -33,21 +33,21 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <form:form>
+                <form:form modelAttribute="book" action="/books/create" method="post">
                     <div class="form-group my-3">
-                        <form:label for="title">Title</form:label>
-                        <form:input type="text" class="form-control" id="" placeholder="Enter Title"/>
+                        <form:label path="title">Title</form:label>
+                        <form:input path="title" type="text" class="form-control" id="" placeholder="Enter Title"/>
                         <form:errors path="title" class="text-danger"/>
                     </div>
                     <div class="form-group my-3">
-                        <form:label for="authorName">Author Name</form:label>
-                        <form:input type="text" class="form-control" id="authorName" placeholder="Enter Author Name"/>
+                        <form:label path="authorName">Author Name</form:label>
+                        <form:input path="authorName" type="text" class="form-control" id="authorName" placeholder="Enter Author Name"/>
                         <form:errors path="authorName" class="text-danger"/>
                     </div>
                     <div class="form-group my-3"> <!-- Text area-->
-                        <form:label for="description">My Thoughts</form:label>
+                        <form:label path="description">My Thoughts</form:label>
+                        <form:textarea path="description" class="form-control" id="description" rows="3" placeholder="Enter your thoughts here!"></form:textarea>                    
                         <form:errors path="description" class="text-danger"/>
-                        <form:textarea class="form-control" id="description" rows="3" placeholder="Enter your thoughts here!"></form:textarea>                    
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form:form>

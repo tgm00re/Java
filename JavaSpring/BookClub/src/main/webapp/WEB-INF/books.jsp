@@ -38,31 +38,22 @@
                 <table class="table table-dark">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Author Name</th>
+                        <th scope="col">Posted By</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                        <c:forEach items="${bookList}" var="book">
+                            <tr>
+                                <th scope="row"><c:out value="${book.id}"/></th>
+                                <td><a href="/books/${book.id}/view"><c:out value="${book.title}"/></a></td>
+                                <td><c:out value="${book.authorName}"/></td>
+                                <td><c:out value="${book.user.name}"/></td>
+                            </tr>
+                        </c:forEach>
+                    
                     </tbody>
                 </table>
             </div>
