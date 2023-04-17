@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.codingdojo.bookclub.mvc.models.LoginUser;
 import com.codingdojo.bookclub.mvc.models.User;
 import com.codingdojo.bookclub.mvc.services.UserService;
 
@@ -27,7 +26,6 @@ public class UserController {
 			return "redirect:/books";
 		}
 		model.addAttribute("user", new User());
-		model.addAttribute("loginUser", new LoginUser());
 		return "index.jsp";
 	}
 	
@@ -37,7 +35,6 @@ public class UserController {
 		//Check for errors
 		if(result.hasErrors()) {
 			System.out.println(result.getAllErrors());
-			model.addAttribute("loginUser", new LoginUser());
 			return "index.jsp";
 		}
 		//Else, everything is good to go!
@@ -49,9 +46,9 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public String login(@Valid @ModelAttribute("loginUser") LoginUser loginUser, BindingResult result, Model model, HttpSession session) {
+	public String login(@Valid BindingResult result, Model model, HttpSession session) {
 		//Call login function
-		User user = userService.login(loginUser, result);
+//		User user = userService.login(loginUser, result);
 		//Check for errors
 		if(result.hasErrors()) {
 			System.out.println(result.getAllErrors());
@@ -61,8 +58,8 @@ public class UserController {
 		
 		//Everything good to go!
 		//Add to session
-		session.setAttribute("user_id", user.getId());
-		session.setAttribute("user_name", user.getName());
+//		session.setAttribute("user_id", user.getId());
+//		session.setAttribute("user_name", user.getName());
 		return "redirect:/books";
 	}
 	
