@@ -25,30 +25,25 @@ public class UserService {
 	
 	public void register(User user, BindingResult result) {
 		boolean isValid = true;
-		User potentialUser = userRepo.findByEmail(user.getEmail());
+		User potentialUser = userRepo.findByName(user.getName());
 		if(potentialUser != null) {
 			//User exists already!
 			result.rejectValue("email", "EXISTS", "Email already exists!");
 			isValid = false;
 		}
-		if(!user.getPassword().equals(user.getConfirmPassword())) {
-			//Confirm password and password do not match
-			System.out.println("Passwords did NOT match!");
-			result.rejectValue("confirmPassword", "NOMATCH", "Confirm password must match password");
-			isValid = false;
-		}
+		
 		if(isValid) {
-			user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+			user.setName(BCrypt.hashpw(user.getName(), BCrypt.gensalt()));
 		}
 	}
 	
 	public User login(LoginUser loginUser, BindingResult result) {
-		User potentialUser = userRepo.findByEmail(loginUser.getEmail());
+		User potentialUser = userRepo.findByName(loginUser.getName());
 		if(potentialUser == null) {
 			//User is not in DB
 			result.rejectValue("email", "DNE", "Email does not exist.");
 		} else {
-			if(!BCrypt.checkpw(loginUser.getPassword(), potentialUser.getPassword())) {
+			if(!BCrypt.checkpw(loginUser.getName(), potentialUser.getName())) {
 				//Password isn't correct.
 				result.rejectValue("password", "NOMATCH", "Incorrect password");
 			}
