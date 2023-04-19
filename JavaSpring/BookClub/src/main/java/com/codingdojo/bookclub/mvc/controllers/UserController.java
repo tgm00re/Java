@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -77,10 +78,23 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-//	@PostMapping("/process/timechange")
-//	public String timeChange() {
-//		
-//	}
+	
+	//TODO: Finish method. 
+	//Will only be used to update 'time' field on user.
+	//Can probably get rid of some parameters, but not sure which. Shouldn't really matter, though.
+	@PostMapping("/user/update/{id}")
+	public String updateBook(@PathVariable("id") Long id, @Valid @ModelAttribute("userToUpdate") User user, BindingResult result, Model model) {
+		User userToUpdate = userService.findOneById(id);
+		if(result.hasErrors()) {
+			System.out.println(result.getAllErrors());
+			model.addAttribute("userToUpdate", userToUpdate);
+			return "editbook.jsp";
+		}
+		userToUpdate.setTime(user.getTime());
+		userService.update(userToUpdate);
+		return "redirect:/";
+		
+	}
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {

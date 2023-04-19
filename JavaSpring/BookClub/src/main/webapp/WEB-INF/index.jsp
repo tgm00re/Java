@@ -48,7 +48,7 @@
         <div class="container bg-dark text-light text-center mt-4 vh-100">
           <h1>Hello World</h1>
           <p>THis is a mock-up home page.</p>
-          <button type="button" class="btn btn-primary btn-block" onclick="alert('you clicked the button!')">Press Me!</button>
+          <button type="button" class="btn btn-primary btn-block" onclick="alert('This is the button we will use to send a signal to the raspberry PI')">Press Me!</button>
           <br/>
           <form>
           	<input type="time" class="bg-primary rounded-pill p-2 text-light mt-3" name="timeInput" id="timeInput">
