@@ -28,12 +28,12 @@ public class UserService {
 		User potentialUser = userRepo.findByName(user.getName());
 		if(potentialUser != null) {
 			//User exists already!
-			result.rejectValue("email", "EXISTS", "Email already exists!");
+			result.rejectValue("name", "EXISTS", "User with that name already exists.");
 			isValid = false;
 		}
 		
 		if(isValid) {
-			user.setName(BCrypt.hashpw(user.getName(), BCrypt.gensalt()));
+			user.setName(user.getName());
 		}
 	}
 	
@@ -41,13 +41,8 @@ public class UserService {
 		User potentialUser = userRepo.findByName(loginUser.getName());
 		if(potentialUser == null) {
 			//User is not in DB
-			result.rejectValue("email", "DNE", "Email does not exist.");
-		} else {
-			if(!BCrypt.checkpw(loginUser.getName(), potentialUser.getName())) {
-				//Password isn't correct.
-				result.rejectValue("password", "NOMATCH", "Incorrect password");
-			}
-		}
+			result.rejectValue("name", "DNE", "No user with that name exists.");
+		} 
 		return potentialUser;
 	}
 	

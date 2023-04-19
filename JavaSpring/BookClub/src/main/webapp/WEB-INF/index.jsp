@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Book Club</title>
+<title>Apple Watch 4.0</title>
   <!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
       rel="stylesheet" 
@@ -21,61 +21,42 @@
       crossorigin="anonymous">
 
 </head>
-<body class="bg-dark text-light">
-    <div class="container p-2"> <!-- Beginning of Container -->
-        <div class="row">
-            <div class="col-sm-12">
-                <h1 class="text-primary">Book Club</h1>
-                <p>A place for friends to share thoughts on books!</p>
-            </div>
+<body style="background-color: #eee;">
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Apple Watch 4.0</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">USERSNAMEGOESHERE</a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="row">
-            <!-- Register -->
-            <div class="col-sm-5">
-                <h2>Register</h2>
-                <form:form modelAttribute="user" action="/register" method="post">
-                    <div class="form-group">
-                        <form:label path="name">Name</form:label>
-                        <form:input path="name" type="text" class="form-control" id="name" placeholder="Enter Name"/>
-                        <form:errors path="name" class="text-danger"/>
-                    </div>
-                    <div class="form-group">
-                        <form:label path="email">Email address</form:label>
-                        <form:input path="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"/>
-                        <form:errors path="email" class="text-danger"/>
-                    </div>
-                    <div class="form-group">
-                        <form:label path="password">Password</form:label>
-                        <form:input path="password" type="password" class="form-control" id="password" placeholder="Password"/>
-                        <form:errors path="password" class="text-danger"/>
-                    </div>
-                    <div class="form-group">
-                        <form:label path="confirmPassword">Confirm Password</form:label>
-                        <form:input path="confirmPassword" type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password"/>
-                        <form:errors path="confirmPassword" class="text-danger"/>
-                    </div>
-                    <button type="submit" class="btn btn-primary my-3">Submit</button>
-                </form:form>
-            </div>
-            <div class="col-sm-2"></div>
-            <!-- Login -->
-            <div class="col-sm-5">
-                <h2>Login</h2>
-                <form:form modelAttribute="loginUser" action="/login" method="post">
-                    <div class="form-group">
-                        <form:label path="email">Email address</form:label>
-                        <form:input path="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"/>
-                        <form:errors path="email" class="text-danger"/>
-                    </div>
-                    <div class="form-group">
-                        <form:label path="password">Password</form:label>
-                        <form:input path="password" type="password" class="form-control" id="password" placeholder="Password"/>
-                        <form:errors path="password" class="text-danger"/>
-                    </div>
-                    <button type="submit" class="btn btn-primary my-3">Submit</button>
-                </form:form>
-            </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main>
+        <div class="container bg-dark text-light text-center mt-4 vh-100">
+          <h1>Hello World</h1>
+          <p>THis is a mock-up home page.</p>
+          <button type="button" class="btn btn-primary btn-block" onclick="alert('you clicked the button!')">Press Me!</button>
+          <br/>
+          <form>
+          	<input type="time" class="bg-primary rounded-pill p-2 text-light mt-3" name="timeInput" id="timeInput">
+          	<input type="submit" value="Set Time"/>
+          </form>
         </div>
-    </div> <!-- End of Container -->
+      </main>
+      
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>

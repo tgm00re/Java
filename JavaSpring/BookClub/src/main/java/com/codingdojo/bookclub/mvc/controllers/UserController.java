@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.codingdojo.bookclub.mvc.models.LoginUser;
 import com.codingdojo.bookclub.mvc.models.User;
 import com.codingdojo.bookclub.mvc.services.UserService;
 
@@ -22,46 +23,63 @@ public class UserController {
 	
 	@RequestMapping("/")
 	public String index(HttpSession session, Model model) {
-		if(session.getAttribute("user_id") != null) {
-			return "redirect:/books";
+		if(session.getAttribute("user_id") == null) {
+			return "redirect:/login";
 		}
-		model.addAttribute("user", new User());
+		//Add model things 
 		return "index.jsp";
 	}
 	
-	@PostMapping("/register")
+	@RequestMapping("/register")
+	public String register(HttpSession session, Model model) {
+		model.addAttribute("user", new User());
+		return "register.jsp";
+	}
+	
+	@RequestMapping("/login")
+	public String login(HttpSession session, Model model) {
+		model.addAttribute("loginUser", new LoginUser());
+		return "login.jsp";
+	}
+		
+	
+	@PostMapping("/process/register")
 	public String register(@Valid @ModelAttribute("user") User user, BindingResult result, HttpSession session, Model model) {
 		userService.register(user, result);
 		//Check for errors
 		if(result.hasErrors()) {
 			System.out.println(result.getAllErrors());
-			return "index.jsp";
+			return "register.jsp";
 		}
 		//Else, everything is good to go!
 		//Add to session
 		User newUser = userService.create(user);
 		session.setAttribute("user_id", newUser.getId());
 		session.setAttribute("user_name", newUser.getName());
-		return "redirect:/books";
+		return "redirect:/";
 	}
 	
-	@PostMapping("/login")
-	public String login(@Valid BindingResult result, Model model, HttpSession session) {
+	@PostMapping("/process/login")
+	public String login(@Valid @ModelAttribute("loginUser") LoginUser loginUser, BindingResult result, Model model, HttpSession session) {
 		//Call login function
-//		User user = userService.login(loginUser, result);
+		User user = userService.login(loginUser, result);
 		//Check for errors
 		if(result.hasErrors()) {
-			System.out.println(result.getAllErrors());
 			model.addAttribute("user", new User());
-			return "index.jsp";
+			return "login.jsp";
 		}
 		
 		//Everything good to go!
 		//Add to session
-//		session.setAttribute("user_id", user.getId());
-//		session.setAttribute("user_name", user.getName());
-		return "redirect:/books";
+		session.setAttribute("user_id", user.getId());
+		session.setAttribute("user_name", user.getName());
+		return "redirect:/";
 	}
+	
+//	@PostMapping("/process/timechange")
+//	public String timeChange() {
+//		
+//	}
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
