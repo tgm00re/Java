@@ -26,7 +26,8 @@ public class UserController {
 		if(session.getAttribute("user_id") == null) {
 			return "redirect:/login";
 		}
-		//Add model things 
+		User loggedInUser = userService.findOneById((long)session.getAttribute("user_id"));
+		model.addAttribute("user", loggedInUser);
 		return "index.jsp";
 	}
 	

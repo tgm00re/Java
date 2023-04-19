@@ -33,7 +33,10 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">USERSNAMEGOESHERE</a>
+                <a class="nav-link active" aria-current="page" href="#"><c:out value="${user.name}"/></a>
+              </li>
+              <li class="nav-item">
+              	<a class="nav-link active text-danger" aria-current="page" href="/bookclub/logout">Logout</a>
               </li>
             </ul>
           </div>
